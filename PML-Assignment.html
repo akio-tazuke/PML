@@ -67,11 +67,11 @@ img {
 </div>
 
 
-<p>The dataframe contained numerical, integer and factor variables. First, I tried a principal component preprocessing for numerical and integer variables. The contribution of even the first principal component was very low, suggesting the variables yield very week model. Also, there are also factor variables. This situation seemed to me that it’s good to try the random forest. I chose 5 cross-validations. Seen from the confusion matrix, the final model seems to be a very good one. So, I tried to predict the test data, but R said some variables are missing! So, I deleted colums in the training set that is missing data in the test set, and re-constructed the random forest as before. This time it took much time. Anyway, the result was as follows.</p>
+<p>The dataframe contained numerical, integer and factor variables. First, I tried a principal component preprocessing for numerical and integer variables. The contribution of even the first principal component was very low, suggesting the variables yield very week model. Also, there are also factor variables. This situation seemed to me that it’s good to try the random forest. I chose 5 cross-validations. Seen from the confusion matrix, the final model seems to be a very good one. So, I tried to predict the test data, but R said some variables are missing! So, I deleted colums in the training set that is missing data in the test set, and re-constructed the random forest with 5 cross-validations. The result was as follows.</p>
 <p>Random Forest</p>
 <p>19622 samples 57 predictor 5 classes: ‘A’, ‘B’, ‘C’, ‘D’, ‘E’</p>
-<p>No pre-processing Resampling: Cross-Validated (5 fold)</p>
-<p>Summary of sample sizes: 15697, 15697, 15699, 15697, 15698</p>
+<p>No pre-processing Resampling: Cross-Validated (2 fold)</p>
+<p>Summary of sample sizes: 9810, 9812</p>
 <p>Resampling results across tuning parameters:</p>
 <pre><code>## Warning: package 'knitr' was built under R version 3.1.2</code></pre>
 <table>
@@ -100,16 +100,16 @@ KappaSD
 2
 </td>
    <td style="text-align:right;"> 
-0.9918
+0.9864
 </td>
    <td style="text-align:right;"> 
-0.9896
+0.9828
 </td>
    <td style="text-align:right;"> 
-0.0019
+1e-04
 </td>
    <td style="text-align:right;"> 
-0.0024
+2e-04
 </td>
   </tr>
   <tr>
@@ -117,16 +117,16 @@ KappaSD
 40
 </td>
    <td style="text-align:right;"> 
-0.9994
+0.9984
 </td>
    <td style="text-align:right;"> 
-0.9993
+0.9980
 </td>
    <td style="text-align:right;"> 
-0.0007
+6e-04
 </td>
    <td style="text-align:right;"> 
-0.0009
+8e-04
 </td>
   </tr>
   <tr>
@@ -134,23 +134,23 @@ KappaSD
 79
 </td>
    <td style="text-align:right;"> 
-0.9986
+0.9980
 </td>
    <td style="text-align:right;"> 
-0.9983
+0.9975
 </td>
    <td style="text-align:right;"> 
-0.0004
+2e-04
 </td>
    <td style="text-align:right;"> 
-0.0005
+3e-04
 </td>
   </tr>
 </tbody>
 </table>
 <p>Accuracy was used to select the optimal model using the largest value. The final value used for the model was mtry = 40.</p>
 <p>Call: randomForest(x = x, y = y, mtry = param$mtry, proximity = TRUE, allowParallel = TRUE) Type of random forest: classification Number of trees: 500 No. of variables tried at each split: 40</p>
-<pre><code>    OOB estimate of  error rate: 0.05%</code></pre>
+<pre><code>    OOB estimate of  error rate: 0.03%</code></pre>
 Confusion matrix:
 <table>
  <thead>
@@ -244,16 +244,16 @@ Class.err
 0
 </td>
    <td style="text-align:right;"> 
-2
-</td>
-   <td style="text-align:right;"> 
-3213
-</td>
-   <td style="text-align:right;"> 
 1
 </td>
    <td style="text-align:right;"> 
-0.00093
+3214
+</td>
+   <td style="text-align:right;"> 
+0
+</td>
+   <td style="text-align:right;"> 
+0.00062
 </td>
   </tr>
   <tr>
@@ -267,19 +267,19 @@ Class.err
 0
 </td>
    <td style="text-align:right;"> 
-2
+0
 </td>
    <td style="text-align:right;"> 
-3605
+3607
 </td>
    <td style="text-align:right;"> 
-0.00055
+0.00000
 </td>
   </tr>
 </tbody>
 </table>
    
-<p>The reason of long waiting is now obvious. Because I deleted colums with missing values, there remained large number of complete rows, leading to a longer iteration. However, this seems to have improved the pridiction significantly. So, I tried to predict the test data. However, the predict function said the data frame is not a required argument. I could not figure out why is this. So my report is incomplete. Time is running out and I got to go to bed for tomorrow’s work…</p>
+<p>Because I deleted colums with missing values, there remained large number of complete rows, leading to a longer iteration. That’s why I did just 2 cross varidations. The larger dataset seems to have improved the pridiction significantly. So, I tried to predict the test data.</p>
 
 
 </div>
